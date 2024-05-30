@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Калькулятор Позднякова</title>
+
+    <style>
+      body {
+        font-size: 17px;
+      }
+
+      #subtitle {
+        font-size: 20px;
+      }
+
+      #your-result {
+        font-size: 20px;
+      }
+
+      #results {
+        font-weight: bold;
+        font-size: 40px;
+      }
+    </style>
+</head>
+<body>
+  <h1>Калькулятор Позднякова</h1>
+  <br>
+  <div class="btn-group">
+    <div>
+        <b id="subtitle">РОСТ</b>
+        <br>
+        <input type="radio" id="h185" name="height" value="5" />
+        Выше 185 - <b>5 баллов</b>
+        <br>
+        <input type="radio" id="h180" name="height" value="4" /> 
+        180-185 - <b>4 балла</b>
+        <br>
+        <input type="radio" id="h179" name="height" value="2" />
+        175-179 - <b>2 балла</b>
+        <br>
+        <input type="radio" id="h175" name="height" value="0" />
+        Выше 185 - <b>0 баллов</b>
+    </div>
+    <br>
+    <div>
+        <b id="subtitle">ТУЛОВИЩЕ</b>
+        <br>
+        <input type="radio" id="body1" name="body" value="5" />
+        Плечи значительно шире таза - <b>5 баллов</b>
+        <br>
+        <input type="radio" id="body2" name="body" value="2" />
+        Диаметр таза равен ширине плеч - <b>2 балла</b>
+        <br>
+        <input type="radio" id="body3" name="body" value="0" />
+        Таз шире плеч - <b>0 баллов</b>
+    </div>
+    <br>
+    <div>
+        <b id="subtitle">ГЛАЗА</b>
+        <br>
+        <input type="radio" id="eyes1" name="eyes" value="3" />
+        С небольшим прищуром - <b>3 балла</b>
+        <br>
+        <input type="radio" id="eyes2" name="eyes" value="0" />
+        Круглые - <b>0 баллов</b>
+    </div>
+    <br>
+    <div>
+        <b id="subtitle">НИЖНЯЯ ЧЕЛЮСТЬ</b>
+        <br>
+        <input type="radio" id="jaw1" name="jaw" value="4" />
+        Выпирает, фигурная, значительно выделяется - <b>4 балла</b>
+        <br>
+        <input type="radio" id="jaw2" name="jaw" value="1" />
+        Обычная - <b>1 балл</b>
+        <br>
+        <input type="radio" id="jaw3" name="jaw" value="0" />
+        Впалая - <b>0 баллов</b>
+    </div>
+    <br>
+    <div>
+        <b id="subtitle">ЛИЦО</b>
+        <br>
+        <input type="radio" id="face1" name="face" value="3" />
+        Больше квадратное чем круглое - <b>3 балла</b>
+        <br>
+        <input type="radio" id="face2" name="face" value="0" />
+        Больше круглое чем квадратное - <b>0 баллов</b>
+    </div>
+    <br>
+    <div>
+        <b id="subtitle">НАДБРОВНЫЕ ДУГИ</b>
+        <br>
+        <input type="radio" id="eyebrow1" name="eyebrow" value="3" />
+        Значительно выделяются - <b>3 балла</b>
+        <br>
+        <input type="radio" id="eyebrow2" name="eyebrow" value="0" />
+        Не выделяются - <b>0 баллов</b>
+    </div>
+    <br>
+    <div>
+        <b id="subtitle">НАЛИЧИЕ ПРЕССА</b>
+        <br>
+        <input type="radio" id="press1" name="press" value="4" />
+        Кубики пресса видны - <b>4 балла</b>
+        <br>
+        <input type="radio" id="press2" name="press" value="2" />
+        Кубики пресса не видны, но живот плоский - <b>2 балла</b>
+        <br>
+        <input type="radio" id="press3" name="press" value="0" />
+        Пресс не виден, но живот есть - <b>0 баллов</b>
+    </div>
+    <br>
+    <div>
+        <b id="subtitle">БОРОДА</b>
+        <br>
+        <input type="radio" id="beard1" name="beard" value="3" />
+        Растёт четко - <b>3 балла</b>
+        <br>
+        <input type="radio" id="beard2" name="beard" value="1" />
+        Растёт но редкая, с проплешинами - <b>1 балл</b>
+        <br>
+        <input type="radio" id="beard3" name="beard" value="0" />
+        Не растёт - <b>0 баллов</b>
+    </div>
+  </div>
+
+  <br><br><br><br>
+  <em id="your-result">Ваш результат:</em>
+  <div id="results">0</div>
+  <br>
+  <div id="description"><em>Вы — </em><b style="color: red">чмошник, задрот, инцел.</b></div>
+
+  <script>
+    let results = document.getElementById("results")
+    let description = document.getElementById("description")
+
+    let height = 0
+    let body = 0
+    let eyes = 0
+    let jaw = 0
+    let face = 0
+    let eyebrow = 0
+    let press = 0
+    let beard = 0
+
+    document.querySelector("div.btn-group").addEventListener("click", function(evt){
+      if(evt.target.type === "radio"){
+        let targetName = evt.target.name
+        let targetValue = parseInt(evt.target.value)
+
+        switch(targetName) {
+          case 'height':
+            height = targetValue
+            break
+
+          case 'body':
+            body = targetValue
+            break
+
+          case 'eyes':
+            eyes = targetValue
+            break
+
+          case 'jaw':
+            jaw = targetValue
+            break
+
+          case 'face':
+            face = targetValue
+            break
+
+          case 'eyebrow':
+            eyebrow = targetValue
+            break
+
+          case 'press':
+            press = targetValue
+            break
+
+          case 'beard':
+            beard = targetValue
+            break
+        }
+
+        console.log(`${targetName}\n${targetValue}`)
+        console.log(`${height}\n${body}\n${eyes}\n${jaw}\n${face}\n${eyebrow}\n${press}\n${beard}`)
+
+        let toResult = height + body + eyes + jaw + face + eyebrow + press + beard
+        
+        let toDescription
+        if (toResult < 10) {
+          toDescription = '<em>Вы — </em><b style="color: red">чмошник, задрот, инцел.</b>'
+        } else if (toResult >= 10 && toResult <= 19) {
+          toDescription = '<em>Вы — </em><b style="color: indianred">омеган.</b>'
+        } else if (toResult >= 20 && toResult <= 27) {
+          toDescription = '<em>Вы — </em><b style="color: seagreen">альфа.</b>'
+        } else if (toResult >= 28) {
+          toDescription = '<em>Вы — </em><b style="color: goldenrod; -webkit-text-stroke: 1px darkgoldenrod; text-stroke: 1px darkgoldenrod">супер ГИГА ЧЕД.</b>'
+        }
+
+        results.textContent = toResult.toString()
+        description.innerHTML = toDescription
+      }
+    })
+  </script>
+</body>
+</html>
